@@ -7,19 +7,25 @@ class Solution {
         
         int n = nums.length;
         long result = 0;
-        int count = 0;
-        for (int start = 0; start < n; start++) {
-            count = 0;  
-            
-            for (int end = start; end < n; end++) {
-                if (nums[end] == maxElement) {
-                    count++;
-                }
-                
-                if (count >= k) {
-                    result++;
-                }
+        int maxCount = 0;
+        int left = 0;
+        int right = 0;
+        
+        while (right < n) {
+            if (nums[right] == maxElement) {
+                maxCount++;
             }
+            
+            while (maxCount >= k) {
+                result += n - right;
+                
+                if (nums[left] == maxElement) {
+                    maxCount--;
+                }
+                left++;
+            }
+            
+            right++;
         }
         
         return result;
