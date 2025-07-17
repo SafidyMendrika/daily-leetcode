@@ -1,23 +1,23 @@
 class Solution:
-    def isValid(self, word: str) -> bool:
-        if not word.isalnum():
-            return False
+    def maximumLength(self, nums: list[int]) -> int:
+        count_even = 0
+        count_odd = 0
+        for num in nums:
+            if num % 2 == 0:
+                count_even += 1
+            else:
+                count_odd += 1
         
-        n = len(word)
-        if n < 3:
-            return False
-        vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]
-
-        vowel = False
-        cons = False
-
-        for c in word:
-            if c.isalpha():
-                if c in vowels:
-                    vowel = True
-                else:
-                    cons = True
+        even_dp = 0
+        odd_dp = 0
+        for num in nums:
+            if num % 2 == 0:
+                even_dp = max(even_dp, odd_dp + 1)
+            else:
+                odd_dp = max(odd_dp, even_dp + 1)
         
-        return vowel and cons
+        return max(count_even, count_odd, even_dp, odd_dp)
+    
 solution = Solution()
-print(solution.isValid("234Adas")) 
+nums = [1,3]
+print(solution.maximumLength(nums)) 
