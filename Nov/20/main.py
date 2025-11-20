@@ -24,4 +24,4 @@ class Solution:
     
 solution = Solution()
 intervals = [[1,3],[3,7],[8,9]]
-print(solution.intersectionSizeTwo(intervals))
+print(solution.intersectionSizeTwo(intervals)) 
