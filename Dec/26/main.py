@@ -1,25 +1,19 @@
-from typing import List
-
 class Solution:
-    def maximumHappinessSum(self, happiness: List[int], k: int) -> int:
-        happiness.sort()
+    def bestClosingTime(self, customers: str) -> int:
+        maxi = 0
+        profit = 0
+        index = 0
 
-        total = 0
-        dec = 0
-        i = len(happiness) - 1
+        for i, x in enumerate(customers):
+            if x == 'Y':
+                profit += 1
+            else:
+                profit -= 1
 
-        while k > 0 and i >= 0:
-            curr = happiness[i] - dec
-            if curr <= 0:
-                break
-            total += curr
-            dec += 1
-            i -= 1
-            k -= 1
+            if profit > maxi:
+                maxi = profit
+                index = i
 
-        return total
-
-solution = Solution()
-happiness = [1,2,3]
-k = 2
-print(solution.maximumHappinessSum(happiness,k))
+        if maxi == 0:
+            return 0
+        return index + 1
